@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Infografis — Desa Brangkal</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <!-- Chart.js dari CDN untuk membuat grafik -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <style>
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: .8rem;
+      margin-bottom: 2.5rem;
+    }
+    .metric {
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      padding: 1.3rem 1.5rem;
+      backdrop-filter: blur(8px);
+      transition: border-color .3s;
+    }
+    .metric:hover { border-color: var(--emas); }
+    .metric-label {
+      font-size: .62rem;
+      color: var(--sub);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: .4rem;
+    }
+    .metric-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--emas);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .metric-sub {
+      font-size: .7rem;
+      color: #2a5a34;
+      margin-top: .3rem;
+    }
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      padding: 1.5rem;
+      backdrop-filter: blur(8px);
+      transition: border-color .3s;
+    }
+    .chart-card:hover { border-color: var(--emas); }
+    .chart-card.full  { grid-column: 1 / -1; } /* span 2 kolom */
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+    .card-head h3 {
+      font-size: .9rem;
+      color: var(--emas2);
+      font-weight: 500;
+      letter-spacing: .5px;
+    }
+    .btn-unduh {
+      background: transparent;
+      border: 1px solid var(--bd);
+      color: var(--sub);
+      padding: .3rem .85rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: .72rem;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .3s;
+    }
+    .btn-unduh:hover {
+      background: var(--hijau);
+      color: #fff;
+      border-color: var(--hijau);
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: .9rem;
+      font-size: .72rem;
+      color: var(--sub);
+    }
+    .legend span  { display: flex; align-items: center; gap: 5px; }
+    .dot {
+      width: 9px; height: 9px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 700px) {
+      .charts-grid          { grid-template-columns: 1fr; }
+      .chart-card.full      { grid-column: 1; }
+      .metrics              { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+     <div class="brand">
+      <div class="brad-icon">
+        <img src="assets/img/logo.jpg" alt="Logo Desa Karanganom">
+      </div>
+      <div class="brand-teks">
+        <hi>Desa Brangkal</hi>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="galeri.html">Galeri</a></li>
+      <li><a href="infografis.html" class="active">Infografis</a></li>
+      <li><a href="unduhan.html">Unduhan</a></li>
+    </ul>
+    <button id="themeBtn" class="theme-btn">☀️ Light</button>
+  </nav>
+
+  <div class="page-header">
+    <h1>Infografis</h1>
+    <p>Data kependudukan Desa Brangkal secara visual</p>
+  </div>
+
+  <section class="section">
+
+    <!-- KARTU METRIK RINGKASAN -->
+    <div class="metrics reveal">
+      <div class="metric">
+        <div class="metric-label">Total Penduduk</div>
+        <div class="metric-val">3.089</div>
+        <div class="metric-sub">jiwa terdaftar</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Laki-laki</div>
+        <div class="metric-val">1.556</div>
+        <div class="metric-sub">jiwa</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Perempuan</div>
+        <div class="metric-val"> 1.533</div>
+        <div class="metric-sub">jiwa</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Kepala Keluarga</div>
+        <div class="metric-val">946</div>
+        <div class="metric-sub">KK terdaftar</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Rukun Warga</div>
+        <div class="metric-val">8</div>
+        <div class="metric-sub">RW aktif</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Rukun Tetangga</div>
+        <div class="metric-val">24</div>
+        <div class="metric-sub">RT aktif</div>
+      </div>
+    </div>
+
+    <!-- GRID GRAFIK -->
+    <div class="charts-grid">
+
+      <!-- GRAFIK 1: Donut Jumlah Penduduk -->
+      <div class="chart-card reveal">
+        <div class="card-head">
+          <h3>👥 Jumlah Penduduk</h3>
+          <button class="btn-unduh" onclick="unduhChart('cPenduduk', 'penduduk')">⬇ Unduh</button>
+        </div>
+        <div style="position:relative; height:200px">
+          <canvas id="cPenduduk"></canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:#2a9b55"></span>Laki-laki 1.556</span>
+          <span><span class="dot" style="background:#c9a030"></span>Perempuan 1.533</span>
+        </div>
+      </div>
+
+      <!-- GRAFIK 2: Bar Kepala Keluarga -->
+      <div class="chart-card reveal">
+        <div class="card-head">
+          <h3>🏠 Kepala Keluarga</h3>
+          <button class="btn-unduh" onclick="unduhChart('cKK', 'kepala-keluarga')">⬇ Unduh</button>
+        </div>
+        <div style="position:relative; height:200px">
+          <canvas id="cKK"></canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:#2a9b55"></span>KK Laki-laki 682</span>
+          <span><span class="dot" style="background:#c9a030"></span>KK Perempuan 264</span>
+        </div>
+      </div>
+
+      <!-- GRAFIK 3: Bar Agama (full width) -->
+      <div class="chart-card full reveal">
+        <div class="card-head">
+          <h3>☪️ Data Agama</h3>
+          <button class="btn-unduh" onclick="unduhChart('cAgama', 'agama')">⬇ Unduh</button>
+        </div>
+        <div style="position:relative; height:220px">
+          <canvas id="cAgama"></canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:#2a9b55"></span>Islam 3043</span>
+          <span><span class="dot" style="background:#c9a030"></span>Kristen 18</span>
+          <span><span class="dot" style="background:#5a8fd4"></span>Katolik 28</span>
+          <span><span class="dot" style="background:#d4537e"></span>Hindu 0</span>
+          <span><span class="dot" style="background:#7f77dd"></span>Buddha 0</span>
+        </div>
+      </div>
+
+      <!-- GRAFIK 4: Bar Pendidikan (full width) -->
+      <div class="chart-card full reveal">
+        <div class="card-head">
+          <h3>🎓 Tingkat Pendidikan</h3>
+          <button class="btn-unduh" onclick="unduhChart('cPendidikan', 'pendidikan')">⬇ Unduh</button>
+        </div>
+        <div style="position:relative; height:220px">
+          <canvas id="cPendidikan"></canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:#2a9b55"></span>SD 580</span>
+          <span><span class="dot" style="background:#c9a030"></span>SMP 510</span>
+          <span><span class="dot" style="background:#5a8fd4"></span>SMA/SMK 720</span>
+          <span><span class="dot" style="background:#d4537e"></span>D3 130</span>
+          <span><span class="dot" style="background:#7f77dd"></span>S1 540</span>
+          <span><span class="dot" style="background:#d85a30"></span>S2 95</span>
+          <span><span class="dot" style="background:#888"></span>Tidak Sekolah 72</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 <span>Desa Brangkal</span> · Kec. Wedi · Kab. Klaten · Jawa Tengah</p>
+    <p class="footer-sub">Asesmen Sumatif Akhir Semester · SMK PPLG</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    /* ── KONFIGURASI WARNA GRAFIK ── */
+    const gridColor = 'rgba(255,255,255,0.05)';  /* warna garis grid */
+    const tickColor = '#5f8a6a';                  /* warna label sumbu */
+
+    /* Opsi dasar yang dipakai semua grafik */
+    const baseOpts = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } }  /* legend custom, bukan bawaan Chart.js */
+    };
+
+    /* ── GRAFIK 1: DONUT Penduduk ── */
+    new Chart('cPenduduk', {
+      type: 'doughnut',
+      data: {
+        labels: ['Laki-laki', 'Perempuan'],
+        datasets: [{
+          data: [1.556, 1.533],
+          backgroundColor: ['#2a9b55', '#c9a030'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        ...baseOpts,
+        cutout: '68%',  /* besar lubang tengah donut */
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              /* format angka dengan titik ribuan */
+              label: v => v.label + ': ' + v.raw.toLocaleString('id-ID') + ' jiwa'
+            }
+          }
+        }
+      }
+    });
+
+    /* ── GRAFIK 2: BAR Kepala Keluarga ── */
+    new Chart('cKK', {
+      type: 'bar',
+      data: {
+        labels: ['KK Laki-laki', 'KK Perempuan'],
+        datasets: [{
+          data: [682, 264],
+          backgroundColor: ['#2a9b55', '#c9a030'],
+          borderRadius: 5,  /* sudut bar membulat */
+          borderWidth: 0
+        }]
+      },
+      options: {
+        ...baseOpts,
+        scales: {
+          x: { grid: { display: false }, ticks: { color: tickColor } },
+          y: { grid: { color: gridColor }, ticks: { color: tickColor } }
+        }
+      }
+    });
+
+    /* ── GRAFIK 3: BAR Agama ── */
+    new Chart('cAgama', {
+      type: 'bar',
+      data: {
+        labels: ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha'],
+        datasets: [{
+          data: [3043, 18, 28, 0, 0],
+          backgroundColor: ['#2a9b55', '#c9a030', '#5a8fd4', '#d4537e', '#7f77dd'],
+          borderRadius: 5,
+          borderWidth: 0
+        }]
+      },
+      options: {
+        ...baseOpts,
+        scales: {
+          x: { grid: { display: false }, ticks: { color: tickColor, autoSkip: false } },
+          y: {
+            grid: { color: gridColor },
+            ticks: { color: tickColor, callback: v => v.toLocaleString('id-ID') }
+          }
+        }
+      }
+    });
+
+    /* ── GRAFIK 4: BAR Pendidikan ── */
+    new Chart('cPendidikan', {
+      type: 'bar',
+      data: {
+        labels: ['SD', 'SMP', 'SMA/SMK', 'D3', 'S1', 'S2', 'Tdk Sekolah'],
+        datasets: [{
+          data: [580, 510, 720, 130, 540, 95, 72],
+          backgroundColor: ['#2a9b55','#c9a030','#5a8fd4','#d4537e','#7f77dd','#d85a30','#888'],
+          borderRadius: 5,
+          borderWidth: 0
+        }]
+      },
+      options: {
+        ...baseOpts,
+        scales: {
+          x: { grid: { display: false }, ticks: { color: tickColor, autoSkip: false } },
+          y: {
+            grid: { color: gridColor },
+            ticks: { color: tickColor, callback: v => v.toLocaleString('id-ID') }
+          }
+        }
+      }
+    });
+
+    /* ── FUNGSI UNDUH GRAFIK ──
+       toDataURL mengubah canvas grafik jadi gambar PNG,
+       lalu dibuat link download otomatis
+    */
+    function unduhChart(idCanvas, namaFile) {
+      const link = document.createElement('a');
+      link.download = 'infografis_' + namaFile + '_desa_brangkal.png';
+      link.href = document.getElementById(idCanvas).toDataURL('image/png');
+      link.click();
+    }
+  </script>
+</body>
+</html>

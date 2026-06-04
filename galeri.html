@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galeri — Desa Brangkal</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="brand">
+      <div class="brad-icon">
+        <img src="assets/img/logo.jpg" alt="Logo Desa Karanganom">
+      </div>
+      <div class="brand-teks">
+        <hi>Desa Brangkal</hi>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="galeri.html" class="active">Galeri</a></li>
+      <li><a href="unduhan.html">Unduhan</a></li>
+    </ul>
+    <button id="themeBtn" class="theme-btn">☀️ Light</button>
+  </nav>
+
+  <div class="page-header">
+    <h1>Galeri Kegiatan</h1>
+    <p>Dokumentasi momen dan kegiatan warga Desa Brangkal</p>
+  </div>
+
+  <section class="section">
+
+    <!-- FILTER -->
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" onclick="filter('semua', this)">Semua</button>
+      <button class="filter-btn" onclick="filter('kegiatan', this)">Kegiatan</button>
+      <button class="filter-btn" onclick="filter('event', this)">Event</button>
+    </div>
+
+    <!-- GRID FOTO -->
+    <div class="galeri-grid" id="galeriGrid">
+
+      <div class="galeri-item reveal" data-cat="event">
+        <img src="assets/img/flyer_desa.jpg" alt="Flyer Event Desa"
+          onerror="this.parentElement.innerHTML='<div class=placeholder><span>🎨</span><p>flyer_desa.jpg</p><small>Flyer Event Desa</small></div>'"/>
+        <div class="overlay">🔍</div>
+      </div>
+
+      <div class="galeri-item reveal" data-cat="kegiatan">
+        <img src="assets/img/kegiatan1.jpg" alt="Kegiatan Warga 1"
+          onerror="this.parentElement.innerHTML='<div class=placeholder><span>🎪</span><p>kegiatan1.jpg</p><small>Kegiatan Warga</small></div>'"/>
+        <div class="overlay">🔍</div>
+      </div>
+
+      <div class="galeri-item reveal" data-cat="kegiatan">
+        <img src="assets/img/kegiatan2.jpg" alt="Kegiatan Warga 2"
+          onerror="this.parentElement.innerHTML='<div class=placeholder><span>🎉</span><p>kegiatan2.jpg</p><small>Kegiatan Warga</small></div>'"/>
+        <div class="overlay">🔍</div>
+      </div>
+
+      <div class="galeri-item reveal" data-cat="event">
+        <img src="assets/img/event1.jpg" alt="Event Desa"
+          onerror="this.parentElement.innerHTML='<div class=placeholder><span>🌟</span><p>event1.jpg</p><small>Event Desa</small></div>'"/>
+        <div class="overlay">🔍</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <button id="lb-close">✕</button>
+    <img id="lb-img" src="" alt=""/>
+  </div>
+
+  <footer>
+    <p>© 2025 <span>Desa Brangkal</span> · Kec. Wedi · Kab. Klaten · Jawa Tengah</p>
+    <p class="footer-sub">Asesmen Sumatif Akhir Semester · SMK PPLG</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Filter galeri berdasarkan kategori
+    function filter(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.galeri-item').forEach(item => {
+        item.style.display = (cat === 'semua' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+
+    // Lightbox: klik foto → tampil besar
+    document.querySelectorAll('.galeri-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        if (!img) return;
+        document.getElementById('lb-img').src = img.src;
+        document.getElementById('lightbox').classList.add('show');
+      });
+    });
+
+    document.getElementById('lb-close').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('show');
+    });
+
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') {
+        document.getElementById('lightbox').classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
